@@ -17,15 +17,8 @@ summary_prompt = PromptTemplate(
 
 qa_prompt = PromptTemplate(
     input_variables=["context", "answer_length", "question"],
-    template="Write an answer ({answer_length}) "
-    "for the question below based on the provided context. "
-    "If the context provides insufficient information, "
-    'reply "I cannot answer". '
-    "For each part of your answer, indicate which sources most support it "
-    "via valid citation markers at the end of sentences, like (Example2012). "
-    "Answer in an unbiased, comprehensive, and scholarly tone. "
-    "If the question is subjective, provide an opinionated answer in the concluding 1-2 sentences. \n\n"
-    "Context (with relevance scores):\n {context}\n"
+    template="Provided context: {context}\n"
+    "Write an answer ({answer_length}) "
     "Question: {question}\n"
     "Answer: ",
 )
@@ -53,7 +46,18 @@ citation_prompt = PromptTemplate(
 )
 
 default_system_prompt = (
-    "Answer in an unbiased, concise, scholarly tone. "
-    "You may refuse to answer if there is insufficient information. "
+    "You are my game advisor. "
+    "If the response in the Question section is not a question, no answer, "
+    'only reply with "Feel free to ask any game-related Question". '
+    "If the question is 1-3 words, no answer, "
+    'only reply with "Please provide a more detailed description". '
+    "If there is insufficient information, "
+    'reply with "I cannot answer." and then provide a possible answer based on common sense in games. '
+    "If the question contains Chinese, no answer, "
+    'only reply with "Only supports English". '
+    "Otherwise, you should write an answer (about 100 words) "
+    "for the question below based on the provided context. "
+    "Answer in an unbiased, comprehensive. "
     "If there are ambiguous terms or acronyms, first define them. "
 )
+
