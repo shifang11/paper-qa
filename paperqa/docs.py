@@ -172,7 +172,7 @@ class Docs(BaseModel, arbitrary_types_allowed=True, smart_union=True):
         docname: Optional[str] = None,
         disable_check: bool = False,
         dockey: Optional[DocKey] = None,
-        chunk_chars: int = 3000,
+        chunk_chars: int = 5000,
     ) -> Optional[str]:
         """Add a document to the collection."""
         if dockey is None:
@@ -591,6 +591,7 @@ class Docs(BaseModel, arbitrary_types_allowed=True, smart_union=True):
                 max_sources=max_sources,
                 marginal_relevance=marginal_relevance,
                 get_callbacks=get_callbacks,
+                disable_summarization=True
             )
         if self.prompts.pre is not None:
             chain = make_chain(
